@@ -1,6 +1,5 @@
 package com.ahoy.ahoychargingapp.data
 
-import android.util.Log
 import com.ahoy.ahoychargingapp.utils.catchIgnoreCancellation
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.FlowPreview

@@ -25,6 +25,14 @@ class ChargingViewModel @Inject constructor(
     override val viewState: StateFlow<ChargingPointsViewState>
         get() = _viewState.asStateFlow()
 
+    private val _effects = Channel<ChargingPointsEffect>(Channel.BUFFERED)
+    override val viewEffects: Flow<ChargingPointsEffect>
+        get() = _effects.receiveAsFlow()
+
+    init {
+        _effects.trySend(AskForLocationPermission)
+    }
+
     override fun processEvent(eventT: ChargingPointsEvent) {
         when(eventT) {
             is ChargingPointClicked -> {
@@ -61,10 +69,4 @@ class ChargingViewModel @Inject constructor(
                 }
             }
     }
-
-    private val _effects = Channel<ChargingPointsEffect>(Channel.BUFFERED)
-    override val viewEffects: Flow<ChargingPointsEffect>
-        get() = _effects.receiveAsFlow()
-
-
 }

@@ -7,6 +7,7 @@ sealed class RootRoute(
     override val id: String
 ) : NavNode {
     companion object RootHost : NavHostNode("zb", null)
+    object Loading: RootRoute("loading")
     object ChargingPoints: RootRoute("charging_points")
     object SinglePoint: RootRoute("single_point")
 }

@@ -9,3 +9,5 @@ data class ShowError(
 ): ChargingPointsEffect
 
 data class Route(val target: RootRoute) : ChargingPointsEffect
+
+object AskForLocationPermission: ChargingPointsEffect
