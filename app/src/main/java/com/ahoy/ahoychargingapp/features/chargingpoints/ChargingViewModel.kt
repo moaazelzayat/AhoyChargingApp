@@ -1,6 +1,5 @@
 package com.ahoy.ahoychargingapp.features.chargingpoints
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.ahoy.ahoychargingapp.activities.RootRoute
 import com.ahoy.ahoychargingapp.data.Resource
@@ -18,8 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChargingViewModel @Inject constructor(
-    private val repository: ChargingPointsRepo
-) : BaseViewModel<ChargingPointsViewState, ChargingPointsEvent>(), WithEffects<ChargingPointsEffect>{
+    private val repository: ChargingPointsRepo,
+) : BaseViewModel<ChargingPointsViewState, ChargingPointsEvent>(),
+    WithEffects<ChargingPointsEffect> {
 
     private val _viewState = MutableStateFlow(ChargingPointsViewState())
     override val viewState: StateFlow<ChargingPointsViewState>
@@ -34,7 +34,7 @@ class ChargingViewModel @Inject constructor(
     }
 
     override fun processEvent(eventT: ChargingPointsEvent) {
-        when(eventT) {
+        when (eventT) {
             is ChargingPointClicked -> {
                 _effects.trySend(Route(RootRoute.SinglePoint))
             }
@@ -52,7 +52,7 @@ class ChargingViewModel @Inject constructor(
         }.catchErrorsAsResource()
             .windowedLoadDebounce()
             .collect { resource ->
-                when(resource){
+                when (resource) {
                     is Resource.Error -> {
                         //TODO show error
                     }

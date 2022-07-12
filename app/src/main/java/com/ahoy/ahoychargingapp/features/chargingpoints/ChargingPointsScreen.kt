@@ -124,14 +124,7 @@ fun ChargingPointsScreen(
         enter = fadeIn(),
         exit = fadeOut()
     ) {
-        val data: List<ChargingPointModel>? = viewState.data?.toList()?.map {
-            ChargingPointModel(
-                title = it.AddressInfo.Title,
-                uuid = it.UUID,
-                isRecentlyVerified = it.IsRecentlyVerified
-            )
-        }
-        data?.let { ChargingPoints(chargingPoints = data) }
+        viewState.data?.let { ChargingPoints(chargingPoints = it) }
     }
 
     AnimatedVisibility(
